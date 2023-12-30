@@ -29,39 +29,46 @@ const IconInput = ({
   ...delegated
 }) => {
   const styles = SIZES[size];
-  return <Label style={{"--width":width + "px"}}>
+  return <Wrapper>
     <TheIcon id={icon} size={styles.size}/>
         <VisuallyHidden>{label}</VisuallyHidden>
         <TextInput  
           {...delegated} 
           style={{
+            "--width":width + "px",
             "--fontSize":`${(styles.fontSize/16)}rem`,
             "--padding":styles.padding,
             "--borderBottom":styles.borderBottom
           }} 
         />
-    </Label>
+    </Wrapper>
 };
 
+const Wrapper = styled.label`
+    position:relative;
+    color: ${COLORS.gray700};
+`;
+
 const TheIcon = styled(Icon)`
+  color:inherit;
   position:absolute;
   left:0;
   bottom:3px;
-`
-
-const Label = styled.label`
-    position:relative;
-    width: var(--width);
 `;
 
 const TextInput = styled.input`
-  width:100%;
+  width: var(--width);
+  color:inherit;
   margin:0;
   padding:var(--padding);
   border:0;
   border-bottom:var(--borderBottom) solid black;
   font-size:var(--fontSize);
   font-weight:700;
+  outline-offset:2px;
+  &:hover{
+    color:black; 
+  }
   &::placeholder{
     font-weight:400;
   }

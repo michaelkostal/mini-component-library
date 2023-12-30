@@ -8,10 +8,16 @@ import VisuallyHidden from '../VisuallyHidden';
 
 const SIZES = {
   'small': {
-    'size':12
+    'size':12,
+    'fontSize':14,
+    'padding':'0 0 0 16px',
+    'borderBottom':'1px'
   }, 
   'large': {
-    'size':16
+    'size':16,
+    'fontSize':18,
+    'padding':'0 0 0 20px',
+    'borderBottom':'2px'
   }
 }
 
@@ -27,7 +33,14 @@ const IconInput = ({
     <TheIcon id={icon} size={styles.size}/>
     <Label>
         <VisuallyHidden>{label}</VisuallyHidden>
-        <Input type="text" placeholder={placeholder} />
+        <Input style={
+          {
+            "--fontSize":`${(styles.fontSize/16)}rem`,
+            "--padding":styles.padding,
+            "--borderBottom":styles.borderBottom
+          }
+        } 
+        type="text" placeholder={placeholder} />
     </Label>
   </Wrapper>;
 };
@@ -39,7 +52,7 @@ const Wrapper = styled.div`
 const TheIcon = styled(Icon)`
   position:absolute;
   left:0;
-  top:0;
+  bottom:3px;
 `
 
 const Label = styled.label`
@@ -49,9 +62,10 @@ const Label = styled.label`
 const Input = styled.input`
   width:100%;
   margin:0;
-  padding:0 0 12px 24px;
+  padding:var(--padding);
   border:0;
-  border-bottom:1px solid black;
+  border-bottom:var(--borderBottom) solid black;
+  font-size:var(--fontSize);
 `
 
 export default IconInput;
